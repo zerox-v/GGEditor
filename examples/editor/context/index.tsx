@@ -3,7 +3,7 @@ import GGEditor, { Flow } from 'gg-editor';
 import WrappedClassComponent from './WrappedClassComponent';
 import WrappedFunctionComponent from './WrappedFunctionComponent';
 import styles from './index.less';
-
+import { Button } from 'antd';
 const data = {
   nodes: [
     {
@@ -30,29 +30,44 @@ const data = {
   ],
 };
 
+const flowRef = React.createRef<Flow>();
+
+function addStep() {
+  const model = {
+    label: '新步骤',
+    x: 200,
+    y: 150,
+  };
+  
+  flowRef.current?.graph?.addItem('node', model);
+}
+
 function App() {
+
   return (
-    <GGEditor>
-      <Flow
-        className={styles.graph}
-        ref={component => {
-          if (component) {
-            console.log('graph:', component.graph);
-          }
-        }}
-        data={data}
-      />
-      <WrappedClassComponent
-        ref={component => {
-          console.log('wrappedClassComponentRef:', component);
-        }}
-      />
-      <WrappedFunctionComponent
-        ref={el => {
-          console.log('wrappedFunctionComponentRef:', el);
-        }}
-      />
-    </GGEditor>
+    <div>
+      <div>
+        <Button onClick={addStep} type="primary">添加步骤</Button>
+      </div>
+      <GGEditor>
+        <Flow
+          className={styles.graph}
+          ref={flowRef}
+          data={data}
+        />
+        <WrappedClassComponent
+          ref={component => {
+            console.log('wrappedClassComponentRef:', component);
+          }}
+        />
+        <WrappedFunctionComponent
+          ref={el => {
+            console.log('wrappedFunctionComponentRef:', el);
+          }}
+        />
+      </GGEditor>
+    </div>
+
   );
 }
 

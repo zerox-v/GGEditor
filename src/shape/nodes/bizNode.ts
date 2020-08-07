@@ -16,7 +16,7 @@ const bizNode: CustomNode = {
   options: {
     size: [120, 60],
     wrapperStyle: {
-      fill: '#5487ea',
+      fill: '#40a9ff',
       radius: 8,
     },
     contentStyle: {
@@ -63,9 +63,9 @@ const bizNode: CustomNode = {
       className: WRAPPER_CLASS_NAME,
       draggable: true,
       attrs: {
-        x: 0,
-        y: -WRAPPER_BORDER_WIDTH * 2,
-        width,
+        x: -WRAPPER_BORDER_WIDTH,
+        y: -WRAPPER_BORDER_WIDTH ,
+        width:width+WRAPPER_BORDER_WIDTH * 2,
         height: height + WRAPPER_BORDER_WIDTH * 2,
         ...wrapperStyle,
       },
@@ -171,9 +171,9 @@ const bizNode: CustomNode = {
         });
       } else {
         wrapperShape.attr({
-          x: 0,
-          y: -WRAPPER_BORDER_WIDTH * 2,
-          width,
+          x: -WRAPPER_BORDER_WIDTH,
+          y: -WRAPPER_BORDER_WIDTH,
+          width:width+WRAPPER_BORDER_WIDTH*2,
           height: height + WRAPPER_BORDER_WIDTH * 2,
         });
       }

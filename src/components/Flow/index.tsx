@@ -70,7 +70,6 @@ class Flow extends React.Component<FlowProps, FlowState> {
       default: {
         'drag-node': {
           type: 'drag-node',
-          enableDelegate: true,
           shouldBegin: this.canDragNode,
         },
         'drag-canvas': {
