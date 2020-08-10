@@ -1,9 +1,9 @@
 import React from 'react';
-import GGEditor, { Flow } from 'gg-editor';
+import GGEditor, { Flow, ContextMenu } from 'gg-editor';
 import WrappedClassComponent from './WrappedClassComponent';
 import WrappedFunctionComponent from './WrappedFunctionComponent';
 import styles from './index.less';
-import { Button } from 'antd';
+import { Button, Menu } from 'antd';
 const data = {
   nodes: [
     {
@@ -38,8 +38,11 @@ function addStep() {
     x: 200,
     y: 150,
   };
-  
   flowRef.current?.graph?.addItem('node', model);
+}
+
+function deleteStep(item){
+  flowRef.current?.graph?.removeItem(item);
 }
 
 function App() {
@@ -54,15 +57,36 @@ function App() {
           className={styles.graph}
           ref={flowRef}
           data={data}
+
         />
-        <WrappedClassComponent
-          ref={component => {
-            console.log('wrappedClassComponentRef:', component);
+        <ContextMenu
+          type="node"
+          renderContent={(item, position, hide) => {
+            console.log(item);
+            const { x: left, y: top } = position;
+            return (
+              <div style={{ position: 'absolute', top, left }}>
+                <Menu mode="vertical"  selectable={false} onClick={()=>{deleteStep(item);hide()}}>
+                  <Menu.Item>复制</Menu.Item>
+                  <Menu.Item>删除</Menu.Item>
+                </Menu>
+              </div>
+            );
           }}
         />
-        <WrappedFunctionComponent
-          ref={el => {
-            console.log('wrappedFunctionComponentRef:', el);
+
+        <ContextMenu
+          type="edge"
+          renderContent={(item, position, hide) => {
+            console.log(item);
+            const { x: left, y: top } = position;
+            return (
+              <div style={{ position: 'absolute', top, left }}>
+                <Menu mode="vertical" selectable={false} onClick={()=>{deleteStep(item);hide()}}>
+                  <Menu.Item>删除</Menu.Item>
+                </Menu>
+              </div>
+            );
           }}
         />
       </GGEditor>
