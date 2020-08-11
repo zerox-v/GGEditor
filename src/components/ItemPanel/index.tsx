@@ -31,8 +31,8 @@ class ItemPanel extends React.Component<ItemPanelProps, ItemPanelState> {
       return;
     }
 
-    const group: GGroup = graph.get('group');
-    const shape: GShape = group.findByClassName(global.component.itemPanel.delegateShapeClassName) as GShape;
+    const group = graph.get('group');
+    const shape = group.findByClassName(global.component.itemPanel.delegateShapeClassName);
 
     if (shape) {
       shape.remove(true);
