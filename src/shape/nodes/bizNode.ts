@@ -55,7 +55,7 @@ const bizNode: CustomNode = {
     return keyShape;
   },
 
-  drawWrapper(model: NodeModel, group: GGroup) {
+  drawWrapper(model: NodeModel, group: any) {
     const [width, height] = this.getSize(model);
     const { wrapperStyle } = this.getOptions(model);
 
@@ -64,8 +64,8 @@ const bizNode: CustomNode = {
       draggable: true,
       attrs: {
         x: -WRAPPER_BORDER_WIDTH,
-        y: -WRAPPER_BORDER_WIDTH ,
-        width:width+WRAPPER_BORDER_WIDTH * 2,
+        y: -WRAPPER_BORDER_WIDTH,
+        width: width + WRAPPER_BORDER_WIDTH * 2,
         height: height + WRAPPER_BORDER_WIDTH * 2,
         ...wrapperStyle,
       },
@@ -74,7 +74,7 @@ const bizNode: CustomNode = {
     return shape;
   },
 
-  drawContent(model: NodeModel, group: GGroup) {
+  drawContent(model: NodeModel, group: any) {
     const [width, height] = this.getSize(model);
     const { contentStyle } = this.getOptions(model);
 
@@ -93,7 +93,7 @@ const bizNode: CustomNode = {
     return shape;
   },
 
-  drawLabel(model: NodeModel, group: GGroup) {
+  drawLabel(model: NodeModel, group: any) {
     const [width, height] = this.getSize(model);
     const { labelStyle } = this.getOptions(model);
 
@@ -111,7 +111,7 @@ const bizNode: CustomNode = {
     return shape;
   },
 
-  setLabelText(model: NodeModel, group: GGroup) {
+  setLabelText(model: NodeModel, group: any) {
     const shape = group.findByClassName(LABEL_CLASS_NAME);
 
     if (!shape) {
@@ -173,7 +173,7 @@ const bizNode: CustomNode = {
         wrapperShape.attr({
           x: -WRAPPER_BORDER_WIDTH,
           y: -WRAPPER_BORDER_WIDTH,
-          width:width+WRAPPER_BORDER_WIDTH*2,
+          width: width + WRAPPER_BORDER_WIDTH * 2,
           height: height + WRAPPER_BORDER_WIDTH * 2,
         });
       }

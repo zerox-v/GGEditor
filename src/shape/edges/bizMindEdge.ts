@@ -25,7 +25,7 @@ const bizMindEdge: CustomEdge = {
   },
 
   setState(name, value, item) {
-    const shape: GShape = item.get('keyShape');
+    const shape: any = item.get('keyShape');
 
     if (!shape) {
       return;

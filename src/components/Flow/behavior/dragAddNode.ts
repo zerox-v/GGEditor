@@ -7,7 +7,7 @@ import CommandManager from '@/common/CommandManager';
 import behaviorManager from '@/common/behaviorManager';
 
 interface DragAddNodeBehavior extends Behavior {
-  shape: GShape | null;
+  shape: any | null;
   handleCanvasMouseEnter(e: GraphEvent): void;
   handleMouseMove(e: GraphEvent): void;
   handleMouseUp(e: GraphEvent): void;
@@ -35,7 +35,7 @@ const dragAddNodeBehavior: DragAddNodeBehavior = {
       return;
     }
 
-    const group: GGroup = graph.get('group');
+    const group: any = graph.get('group');
     const model: Partial<NodeModel> = global.component.itemPanel.model;
 
     const { size = 100 } = model;

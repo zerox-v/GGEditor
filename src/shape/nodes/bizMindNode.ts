@@ -17,7 +17,7 @@ const bizMindNode: CustomNode = {
     this.adjustButton(model, item);
   },
 
-  drawButton(model: NodeModel, group: GGroup) {
+  drawButton(model: NodeModel, group: any) {
     const { children, collapsed } = model;
 
     [FOLD_BUTTON_CLASS_NAME, UNFOLD_BUTTON_CLASS_NAME].forEach(className => {
