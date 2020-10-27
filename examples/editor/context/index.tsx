@@ -41,24 +41,26 @@ function addStep() {
   flowRef.current?.graph?.addItem('node', model);
 }
 
-function deleteStep(item){
+function deleteStep(item) {
   flowRef.current?.graph?.removeItem(item);
+}
+function getData() {
+  console.log(flowRef.current?.graph?.save());
 }
 
 function App() {
-
   return (
     <div>
       <div>
-        <Button onClick={addStep} type="primary">添加步骤</Button>
+        <Button onClick={addStep} type="primary">
+          添加步骤
+        </Button>
+        <Button onClick={getData} type="primary">
+          获取数据
+        </Button>
       </div>
       <GGEditor>
-        <Flow
-          className={styles.graph}
-          ref={flowRef}
-          data={data}
-
-        />
+        <Flow className={styles.graph} ref={flowRef} data={data} />
         <ContextMenu
           type="node"
           renderContent={(item, position, hide) => {
@@ -66,7 +68,14 @@ function App() {
             const { x: left, y: top } = position;
             return (
               <div style={{ position: 'absolute', top, left }}>
-                <Menu mode="vertical"  selectable={false} onClick={()=>{deleteStep(item);hide()}}>
+                <Menu
+                  mode="vertical"
+                  selectable={false}
+                  onClick={() => {
+                    deleteStep(item);
+                    hide();
+                  }}
+                >
                   <Menu.Item>复制</Menu.Item>
                   <Menu.Item>删除</Menu.Item>
                 </Menu>
@@ -82,7 +91,14 @@ function App() {
             const { x: left, y: top } = position;
             return (
               <div style={{ position: 'absolute', top, left }}>
-                <Menu mode="vertical" selectable={false} onClick={()=>{deleteStep(item);hide()}}>
+                <Menu
+                  mode="vertical"
+                  selectable={false}
+                  onClick={() => {
+                    deleteStep(item);
+                    hide();
+                  }}
+                >
                   <Menu.Item>删除</Menu.Item>
                 </Menu>
               </div>
@@ -91,7 +107,6 @@ function App() {
         />
       </GGEditor>
     </div>
-
   );
 }
 
