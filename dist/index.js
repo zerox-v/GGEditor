@@ -43406,10 +43406,13 @@
     },
   };
   function _n() {
-    return 'xxxxxxxx'.replace(/[xy]/g, function(t) {
-      var e = (16 * Math.random()) | 0;
-      return ('x' === t ? e : (3 & e) | 8).toString(16);
-    });
+    for (var t = [], e = 0; e < 36; e++) t[e] = '0123456789abcdef'.substr(Math.floor(16 * Math.random()), 1);
+    return (
+      (t[14] = '4'),
+      (t[19] = '0123456789abcdef'.substr((3 & t[19]) | 8, 1)),
+      (t[8] = t[13] = t[18] = t[23] = '-'),
+      t.join('')
+    );
   }
   u.registerEdge('bizMindEdge', wn, 'cubic-horizontal');
   var Mn = function(t) {
@@ -43670,7 +43673,7 @@
       return null == t ? {} : ir(t, e);
     }),
     dr = new (function() {
-      (this.version = '3.1.3'),
+      (this.version = '3.1.4'),
         (this.trackable = !0),
         (this.clipboard = { point: { x: 0, y: 0 }, models: [] }),
         (this.component = { itemPanel: { model: null, delegateShapeClassName: 'delegateShape_' + _n() } }),
