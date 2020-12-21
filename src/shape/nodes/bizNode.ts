@@ -77,7 +77,6 @@ const bizNode: CustomNode = {
   drawContent(model: NodeModel, group: any) {
     const [width, height] = this.getSize(model);
     const { contentStyle } = this.getOptions(model);
-
     const shape = group.addShape('rect', {
       className: CONTENT_CLASS_NAME,
       draggable: true,

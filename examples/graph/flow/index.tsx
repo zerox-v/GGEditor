@@ -9,6 +9,10 @@ const data = {
       label: 'Node',
       x: 50,
       y: 50,
+      anchorPoints: [
+        [0, 1],
+        [0.5, 1],
+      ],
     },
     {
       id: '1',

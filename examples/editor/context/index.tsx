@@ -35,6 +35,9 @@ function App() {
         label: 'Node',
         x: 50,
         y: 50,
+        wrapperStyle: {
+          fill: '#ff0000',
+        },
       },
       {
         id: '1',
@@ -45,11 +48,13 @@ function App() {
     ],
     edges: [
       {
-        label: 'Label',
         source: '0',
         sourceAnchor: 1,
         target: '1',
         targetAnchor: 0,
+        style: {
+          stroke: '#ff0000',
+        },
       },
     ],
   };
@@ -73,7 +78,7 @@ function App() {
         </Button>
       </div>
       <GGEditor>
-        <Flow className={styles.graph} ref={flowRef} data={flowData} />
+        <Flow disable={true} graphConfig={{}} className={styles.graph} ref={flowRef} data={flowData} />
         <ContextMenu
           type="node"
           renderContent={(item, position, hide) => {

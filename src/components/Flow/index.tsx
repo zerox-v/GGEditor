@@ -16,6 +16,7 @@ interface FlowProps extends Partial<GraphReactEventProps> {
   className?: string;
   data: FlowData;
   graphConfig?: Partial<GraphOptions>;
+  disable?: boolean;
   customModes?: (mode: string, behaviors: any) => object;
 }
 
@@ -65,25 +66,28 @@ class Flow extends React.Component<FlowProps, FlowState> {
   initGraph = (width: number, height: number) => {
     const { containerId } = this;
     const { graphConfig, customModes } = this.props;
-
-    const modes: any = merge(behaviorManager.getRegisteredBehaviors(GraphType.Flow), {
-      default: {
-        'drag-node': {
-          type: 'drag-node',
-          shouldBegin: this.canDragNode,
-        },
-        'drag-canvas': {
-          type: 'drag-canvas',
-          shouldBegin: this.canDragOrZoomCanvas,
-          shouldUpdate: this.canDragOrZoomCanvas,
-        },
-        'zoom-canvas': {
-          type: 'zoom-canvas',
-          shouldUpdate: this.canDragOrZoomCanvas,
-        },
-        'recall-edge': 'recall-edge',
-        'brush-select': 'brush-select',
+    console.log('graphConfig', graphConfig);
+    let def = {
+      'drag-canvas': {
+        type: 'drag-canvas',
+        shouldBegin: this.canDragOrZoomCanvas,
+        shouldUpdate: this.canDragOrZoomCanvas,
       },
+      'zoom-canvas': {
+        type: 'zoom-canvas',
+        shouldUpdate: this.canDragOrZoomCanvas,
+      },
+    };
+    if (!this.props.disable) {
+      def['drag-node'] = {
+        type: 'drag-node',
+        shouldBegin: this.canDragNode,
+      };
+      def['recall-edge'] = 'recall-edge';
+      def['brush-select'] = 'brush-select';
+    }
+    const modes: any = merge(this.props.disable ? {} : behaviorManager.getRegisteredBehaviors(GraphType.Flow), {
+      default: def,
     });
 
     Object.keys(modes).forEach(mode => {
