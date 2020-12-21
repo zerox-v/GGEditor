@@ -43673,7 +43673,7 @@
       return null == t ? {} : ir(t, e);
     }),
     dr = new (function() {
-      (this.version = '3.1.4'),
+      (this.version = '3.1.5'),
         (this.trackable = !0),
         (this.clipboard = { point: { x: 0, y: 0 }, models: [] }),
         (this.component = { itemPanel: { model: null, delegateShapeClassName: 'delegateShape_' + _n() } }),
@@ -45019,24 +45019,25 @@
           var r = f(e).containerId,
             o = e.props,
             i = o.graphConfig,
-            a = o.customModes,
-            c = Je(_o.getRegisteredBehaviors(Ge.Flow), {
-              default: {
-                'drag-node': { type: 'drag-node', shouldBegin: e.canDragNode },
-                'drag-canvas': {
-                  type: 'drag-canvas',
-                  shouldBegin: e.canDragOrZoomCanvas,
-                  shouldUpdate: e.canDragOrZoomCanvas,
-                },
-                'zoom-canvas': { type: 'zoom-canvas', shouldUpdate: e.canDragOrZoomCanvas },
-                'recall-edge': 'recall-edge',
-                'brush-select': 'brush-select',
-              },
-            });
+            a = o.customModes;
+          console.log('graphConfig', i);
+          var c = {
+            'drag-canvas': {
+              type: 'drag-canvas',
+              shouldBegin: e.canDragOrZoomCanvas,
+              shouldUpdate: e.canDragOrZoomCanvas,
+            },
+            'zoom-canvas': { type: 'zoom-canvas', shouldUpdate: e.canDragOrZoomCanvas },
+          };
+          e.props.disable ||
+            ((c['drag-node'] = { type: 'drag-node', shouldBegin: e.canDragNode }),
+            (c['recall-edge'] = 'recall-edge'),
+            (c['brush-select'] = 'brush-select'));
+          var h = Je(e.props.disable ? {} : _o.getRegisteredBehaviors(Ge.Flow), { default: c });
           return (
-            Object.keys(c).forEach(function(t) {
-              var e = c[t];
-              c[t] = Object.values(a ? a(t, e) : e);
+            Object.keys(h).forEach(function(t) {
+              var e = h[t];
+              h[t] = Object.values(a ? a(t, e) : e);
             }),
             (e.graph = new u.Graph(
               s(
@@ -45044,7 +45045,7 @@
                   container: r,
                   width: t,
                   height: n,
-                  modes: c,
+                  modes: h,
                   defaultNode: { type: 'bizFlowNode' },
                   defaultEdge: { type: 'bizFlowEdge' },
                 },

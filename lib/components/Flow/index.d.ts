@@ -6,6 +6,7 @@ interface FlowProps extends Partial<GraphReactEventProps> {
   className?: string;
   data: FlowData;
   graphConfig?: Partial<GraphOptions>;
+  disable?: boolean;
   customModes?: (mode: string, behaviors: any) => object;
 }
 interface FlowState {}
